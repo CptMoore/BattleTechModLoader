@@ -1,0 +1,6 @@
+[submodule "DynModLib"]
+	path = DynModLib
+	url = ./DynModLib
+[submodule "ModTek"]
+	path = ModTek
+	url = ./ModTek

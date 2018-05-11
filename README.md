@@ -1,31 +1,56 @@
-# BattleTechModLoader
+# BattleTechModTools
 
-A simple mod loader and injector for HBS's BattleTech PC game.
+BattleTech Mods Tools is an easy to install compilation of various modding libraries and tools for mod users and modders alike.
 
-***STILL IN ACTIVE DEVELOPMENT!***
+## Requirements
 
-## Installing/Updating
+** Warning: Uses the experimental mod loaders BTML, ModTek and DynModLib **
 
-Download the zip, and extact the entire contents (the .exe and all of the .dlls) into your `\BATTLETECH\BattleTech_Data\Managed\` folder. Run `BattleTechModLoaderInjector.exe`, it'll pop open a console window and run through the process of modifying `Assembly-CSharp.dll`, including making a backup into `Assembly-CSharp.dll.orig`. Don't worry if the assembly is slightly smaller than it started, it will still work, unless the console window shows an exception during the writing process. If this happens, just delete it and rename the backup to have your original file back.
+Able to help with finding issues and reporting them.
 
-If the game patches or somehow replaces `Assembly-CSharp.dll`, running the injector will patch it again. Since the mod loader and the injector are very simple, it should be pretty resistant to updates changing the assembly.
+## Features
 
-Updates to BattleTechModLoader itself will almost certainly not require you to re-inject an already injected assembly. Simply replace all of the included files.
+Includes the following mod tools:
+* [ModTek](https://github.com/Mpstark/ModTek) by Mpstark, is a sophisticated mod loader with dependency management and easy json patching without needing VersionManifest.csv modifications.
+* [DynModLib](https://github.com/CptMoore/DynModLib) by CptMoore, provides C# scripting by compiling mods when launching the game.
+* [BattleTechModLoader](https://github.com/Mpstark/BattleTechModLoader) by Mpstark, a.k.a BTML, a simple mod loader which is required by various mods including other mod tools like ModTek and DynModLib.
+* [BattleTechModLauncher](https://github.com/CptMoore/BattleTechModTools) by CptMoore, makes sure that BTML loads correctly after BattleTech updates, use this to always start BattleTech.
+* [BattleTechModInstaller](https://github.com/CptMoore/BattleTechModTools) by CptMoore, installs this compilation.
 
-*Note: Running the injector on an already injected game won't bork anything, as it checks to see if the assembly has already been injected.*
+## Mods to Test out
 
-## Note For Modders
+Recommended (due to advertised features being implemented by the BattleTech makers later):
+* [CommanderPortraitLoader](https://github.com/Morphyum/CommanderPortraitLoader)
+* [SpeedMod](https://github.com/CptMoore/SpeedMod)
 
-Because of its extremely simple nature, you should be careful about basing your mod on BTML itself -- if you're developing a tool or mod that won't any need additional files (or advanced features, such as dependancies, load order, etc.), this might be a good fit.
+Other mods to check out:
+* [HardpointFixMod](https://github.com/CptMoore/HardpointFixMod)
+* [StatsFixMod](https://github.com/CptMoore/StatsFixMod)
+* [bt-real-hit-chance](https://github.com/alexanderabramov/bt-real-hit-chance)
+* [BrokenSalvagedMechs](https://github.com/Morphyum/BrokenSalvagedMechs)
+* [MechMaintenanceByCost](https://github.com/Morphyum/MechMaintenanceByCost)
+* [PermanentEvasion](https://github.com/Morphyum/PermanentEvasion)
 
-I'm currently working on another utility -- [ModTek](https://github.com/Mpstark/ModTek/tree/master/ModTek) that will provide a better all around experience for users and modders alike. It uses a `mod.json` file for each mod that defines its `.dll`, an entry point, dependancies, load-order, and facilitates importing/modifying additional files into the game. As of 5/5/2018, this mod is in ***Heavy*** developement, and won't be ready to go for a while yet. If you'd like to help out, jump into either BattleTech Discord ([1](https://discord.gg/ncTCh3k) or [2](https://discord.gg/fxXr8nV)) and ask around there or message me directly on [Reddit](https://www.reddit.com/user/Mpstark/).
+For more mods check out:
+* https://www.reddit.com/r/BattleTechMods/
+* https://www.nexusmods.com/battletech *please don't publish mods yet on nexus that rely on BTML or ModTek*
 
-## How It Works
+## Install and Use
 
-BTML uses [Mono.Cecil](https://github.com/jbevain/cecil) to parse `Assembly-CSharp.dll` and find a predetermined point (`BattleTech.GameInstance`'s constructor) in code to inject a single method call into `BattleTechModLoader.dll`, which will load `0Harmony.dll`, and then any `.dll` file contained within the root of `\BATTLETECH\Mods\`. After loading each assembly, the loader will look for any `public static Init()` functions on any of the classes defined in the assembly and will invoke all of them.
+Follow the setups instruction, if the battletech directory cannot be found, just make it point to the directory where BattleTech.exe is located in.
 
-A log is generated at `\Mods\BTModLoader.log` overwriting any previous log. This log additionally contains a record all of the Harmony hooks that happen at mod loading time.
+Once finished installing, the injector should have patched your battletech installation to load up mods. The injector has to run again after every game update, use the mod launcher to make this happen automatically.
 
-## Licence
+## Uninstall
 
-BTML is provided under the "Unlicence", which releases the work into the public domain.
+Just uninstall as you would any other program using "Programs and Features". Will undo the injections done by BTML.
+
+## Modding
+
+> I want to mod myself
+
+Go visit the short list of TODOs at https://github.com/CptMoore/DynModLib#how-to-use
+
+## Download
+
+Downloads can be found on [github](https://github.com/CptMoore/BattleTechModTools/releases).
