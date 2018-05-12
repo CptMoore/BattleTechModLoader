@@ -7,7 +7,7 @@ set -ex
 # prepare mods
 cd mods
 
-MODS="SpeedMod HardpointFixMod StatsFixMod"
+MODS="SpeedMod HardpointFixMod StatsFixMod StartingMercsMod"
 
 for MOD in $MODS
 do

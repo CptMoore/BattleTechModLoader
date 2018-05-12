@@ -3,8 +3,8 @@
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
 #define MyAppName "BattleTechMod Tools With Mods Preview"
-#define MySetupName "BTMTWithModsPreviewSetup"
-#define MyAppVersion "0.1.0"
+#define MyAppVersion "0.2.0"
+#define MySetupName "BTMToolsWithModsPreview2Setup"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
@@ -19,7 +19,7 @@
 AppId={{1765276C-3F2D-49BE-BB05-926C0BA2C863}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVerName={#MyAppName}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
@@ -38,6 +38,7 @@ DisableWelcomePage=no
 DisableDirPage=no
 DirExistsWarning=no
 UsePreviousAppDir=no
+UninstallDisplayIcon={app}\BattleTechModLauncher.exe
 
 [Messages]
 ExitSetupMessage=Setup is not complete. If you exit now, {#MyAppName} will not be installed.%n%nExit Setup?
@@ -64,9 +65,10 @@ Source: "..\ModTek\ModTek\bin\Release\ModTek.dll"; DestDir: "{app}\Mods"; Flags:
 Source: "mods\SpeedMod\*"; DestDir: "{app}\Mods\SpeedMod"; Flags: ignoreversion recursesubdirs
 Source: "mods\HardpointFixMod\*"; DestDir: "{app}\Mods\HardpointFixMod"; Flags: ignoreversion recursesubdirs
 Source: "mods\StatsFixMod\*"; DestDir: "{app}\Mods\StatsFixMod"; Flags: ignoreversion recursesubdirs
+Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod"; Flags: ignoreversion recursesubdirs
 
 [Icons]
-Name: "{userdesktop}\BTMLauncher"; Filename: "{app}\BattleTechModLauncher.exe"; Tasks: desktopicon
+Name: "{userdesktop}\BTMod Launcher"; Filename: "{app}\BattleTechModLauncher.exe"; Tasks: desktopicon
 Name: "{userdesktop}\BattleTech Mods"; Filename: "{app}\Mods\"; Tasks: modsicon
 
 [Run]
