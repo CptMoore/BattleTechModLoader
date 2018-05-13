@@ -50,9 +50,20 @@ namespace BattleTechModLauncher
             try
             {
                 int rv;
-                if (File.Exists(Path.Combine(gameDir, "steam_api64.dll")) || File.Exists(Path.Combine(gameDir, "steam_api.dll")))
+                var steamAppIdFilePath = Path.Combine(gameDir, "steam_appid.txt");
+                if (File.Exists(steamAppIdFilePath))
                 {
-                    rv = StartApplication("cmd.exe", gameDir, "/c start /B steam://rungameid/637090");
+                    string id;
+                    using (var reader = new StreamReader(steamAppIdFilePath))
+                    {
+                        id = reader.ReadToEnd().Trim();
+                    }
+
+                    if (string.IsNullOrEmpty(id))
+                    {
+                        id = "637090";
+                    }
+                    rv = StartApplication("cmd.exe", gameDir, $"/c start /B steam://rungameid/{id}");
                 }
                 else
                 {
