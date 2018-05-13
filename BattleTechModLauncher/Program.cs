@@ -35,6 +35,7 @@ namespace BattleTechModLauncher
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
                     );
+                    return;
                 }
             }
             catch (Exception e)
@@ -45,6 +46,7 @@ namespace BattleTechModLauncher
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+                return;
             }
 
             try
@@ -83,6 +85,7 @@ namespace BattleTechModLauncher
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
                     );
+                    return;
                 }
             }
             catch (Exception e)
@@ -93,6 +96,7 @@ namespace BattleTechModLauncher
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
+                return;
             }
         }
 
