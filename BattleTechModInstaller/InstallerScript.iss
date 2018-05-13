@@ -3,8 +3,8 @@
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
 #define MyAppName "BattleTechMod Tools With Mods Preview"
-#define MyAppVersion "0.2.2"
-#define MySetupName "BTMToolsWithModsPreview2bSetup"
+#define MyAppVersion "0.2.3"
+#define MySetupName "BTMToolsWithModsPreview2cSetup"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
@@ -70,6 +70,8 @@ Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod"; Flags
 [Icons]
 Name: "{userdesktop}\BTMod Launcher"; Filename: "{app}\BattleTechModLauncher.exe"; Tasks: desktopicon
 Name: "{userdesktop}\BattleTech Mods"; Filename: "{app}\Mods\"; Tasks: modsicon
+Name: "{app}\Mods\Enable BTModLoader"; Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"
+Name: "{app}\Mods\Disable BTModLoader"; Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: "/restore";
 
 [Run]
 Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: "/nokeypress"
