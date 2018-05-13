@@ -1,13 +1,14 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BattleTechModLauncher
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
             var gameDir = Directory.GetCurrentDirectory();
             var managedDir = Path.Combine(gameDir, Path.Combine("BattleTech_Data", "Managed"));
@@ -55,7 +56,12 @@ namespace BattleTechModLauncher
                 }
                 else
                 {
-                    rv = StartApplication("cmd.exe", gameDir, "/c start /B BattleTech.exe");
+                    var quotedArgs = args
+                        .Select(x => x.Replace("\"", "\\\""))
+                        .Select(x => x.Contains(" ") ? "\"" + x + "\"" : x)
+                        .ToList();
+                    var argumentsString = string.Join(" ", quotedArgs);
+                    rv = StartApplication("cmd.exe", gameDir, "/c start /B BattleTech.exe " + argumentsString);
                 }
 
                 if (rv != 0)
