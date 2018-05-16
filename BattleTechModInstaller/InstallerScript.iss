@@ -3,8 +3,8 @@
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
 #define MyAppName "BattleTechMod Tools With Mods Preview"
-#define MyAppVersion "0.2.3"
-#define MySetupName "BTMToolsWithModsPreview2cSetup"
+#define MyAppVersion "0.4.0"
+#define MySetupName "BTMToolsSetup-0.4"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
@@ -50,8 +50,12 @@ WizardSelectDir=Select {#MyParentApp} Install Location
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
-Name: "modsicon"; Description: "Add shortcut to mods folder"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "modsicon"; Description: "Add desktop shortcut to the mods folder"; GroupDescription: "{cm:AdditionalIcons}"
+Name: "desktopicon"; Description: "Add desktop shortcut to the optional launcher - keeps mods enabled after game updates"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "SpeedMod"; Description: "Install SpeedMod - Press p in combat to make the game faster"; GroupDescription: "Included Mods"
+Name: "StartingMercsMod"; Description: "Install StartingMercsMod - Randomizes starting mercs "; GroupDescription: "Included Mods"; Flags: unchecked
+Name: "HardpointFixMod"; Description: "Install HardpointFixMod - Fixes issues with mech hardpoints"; GroupDescription: "Included Mods"; Flags: unchecked
+Name: "StatsFixMod"; Description: "Install StatsFixMod (alpha) - Fixes issues with stats calculations"; GroupDescription: "Included Mods"; Flags: unchecked
 
 [Files]
 Source: "..\BattleTechModLauncher\bin\Release\BattleTechModLauncher.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -62,10 +66,10 @@ Source: "..\DynModLib\source\bin\Release\DynModLib.dll"; DestDir: "{app}\Mods\Dy
 Source: "..\DynModLib\Mono.CSharp.dll"; DestDir: "{app}\Mods\DynModLib"; Flags: ignoreversion
 Source: "..\DynModLib\mod.json"; DestDir: "{app}\Mods\DynModLib"; Flags: ignoreversion
 Source: "..\ModTek\ModTek\bin\Release\ModTek.dll"; DestDir: "{app}\Mods"; Flags: ignoreversion
-Source: "mods\SpeedMod\*"; DestDir: "{app}\Mods\SpeedMod"; Flags: ignoreversion recursesubdirs
-Source: "mods\HardpointFixMod\*"; DestDir: "{app}\Mods\HardpointFixMod"; Flags: ignoreversion recursesubdirs
-Source: "mods\StatsFixMod\*"; DestDir: "{app}\Mods\StatsFixMod"; Flags: ignoreversion recursesubdirs
-Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod"; Flags: ignoreversion recursesubdirs
+Source: "mods\SpeedMod\*"; DestDir: "{app}\Mods\SpeedMod"; Flags: ignoreversion recursesubdirs; Tasks: SpeedMod
+Source: "mods\HardpointFixMod\*"; DestDir: "{app}\Mods\HardpointFixMod"; Flags: ignoreversion recursesubdirs; Tasks: HardpointFixMod
+Source: "mods\StatsFixMod\*"; DestDir: "{app}\Mods\StatsFixMod"; Flags: ignoreversion recursesubdirs; Tasks: StatsFixMod
+Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod"; Flags: ignoreversion recursesubdirs; Tasks: StartingMercsMod
 
 [Icons]
 Name: "{userdesktop}\BTMod Launcher"; Filename: "{app}\BattleTechModLauncher.exe"; Tasks: desktopicon
