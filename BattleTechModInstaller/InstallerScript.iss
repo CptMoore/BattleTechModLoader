@@ -51,9 +51,9 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "modsicon"; Description: "Add desktop shortcut to the mods folder"; GroupDescription: "{cm:AdditionalIcons}"
-Name: "desktopicon"; Description: "Add desktop shortcut to the optional launcher - keeps mods enabled after game updates"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "desktopicon"; Description: "Add desktop shortcut to the auto-inject launcher"; GroupDescription: "{cm:AdditionalIcons}"
 Name: "SpeedMod"; Description: "Install SpeedMod - Press p in combat to make the game faster"; GroupDescription: "Included Mods"
-Name: "StartingMercsMod"; Description: "Install StartingMercsMod - Randomizes starting mercs "; GroupDescription: "Included Mods"; Flags: unchecked
+Name: "StartingMercsMod"; Description: "Install StartingMercsMod - Randomizes starting mercs"; GroupDescription: "Included Mods"; Flags: unchecked
 Name: "HardpointFixMod"; Description: "Install HardpointFixMod - Fixes issues with mech hardpoints"; GroupDescription: "Included Mods"; Flags: unchecked
 Name: "StatsFixMod"; Description: "Install StatsFixMod (alpha) - Fixes issues with stats calculations"; GroupDescription: "Included Mods"; Flags: unchecked
 
