@@ -33,6 +33,7 @@ Other mods to check out:
 
 For more mods check out:
 * https://www.reddit.com/r/BattleTechMods/
+* https://www.reddit.com/r/BattleTechMods/comments/8jpklv/largeish_mod_list_your_thoughts_addremove/
 * https://www.nexusmods.com/battletech *please don't publish mods yet on nexus that rely on BTML or ModTek*
 
 ## Install and Use
