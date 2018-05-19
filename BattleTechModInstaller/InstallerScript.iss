@@ -3,8 +3,8 @@
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
 #define MyAppName "BattleTechMod Tools With Mods Preview"
-#define MyAppVersion "0.4.0"
-#define MySetupName "BTMToolsSetup-0.4"
+#define MyAppVersion "0.5.0"
+#define MySetupName "BTMToolsSetup-0.5"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
@@ -59,7 +59,7 @@ Name: "StatsFixMod"; Description: "Install StatsFixMod (alpha) - Fixes issues wi
 
 [Files]
 Source: "..\BattleTechModLauncher\bin\Release\BattleTechModLauncher.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BattleTechModLoaderInjector\bin\Release\0Harmony.dll"; DestDir: "{app}\BattleTech_Data\Managed"; Flags: ignoreversion
+Source: "..\0Harmony.dll"; DestDir: "{app}\BattleTech_Data\Managed"; Flags: ignoreversion
 Source: "..\BattleTechModLoaderInjector\bin\Release\BattleTechModLoader.dll"; DestDir: "{app}\BattleTech_Data\Managed"; Flags: ignoreversion
 Source: "..\BattleTechModLoaderInjector\bin\Release\BattleTechModLoaderInjector.exe"; DestDir: "{app}\BattleTech_Data\Managed"; Flags: ignoreversion
 Source: "..\DynModLib\source\bin\Release\DynModLib.dll"; DestDir: "{app}\Mods\DynModLib"; Flags: ignoreversion
