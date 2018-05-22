@@ -2,9 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
-#define MyAppName "BattleTechMod Tools With Mods Preview"
-#define MyAppVersion "0.5.0"
-#define MySetupName "BTMToolsSetup-0.5"
+#define MyAppName "BattleTechMod Tools With Mods"
+#define MyAppVersion "0.6.0"
+#define MySetupName "BTMToolsSetup-0.6"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
@@ -54,6 +54,7 @@ Name: "modsicon"; Description: "Add desktop shortcut to the mods folder"; GroupD
 Name: "desktopicon"; Description: "Add desktop shortcut to the auto-inject launcher"; GroupDescription: "{cm:AdditionalIcons}"
 Name: "SpeedMod"; Description: "Install SpeedMod - Press p in combat to make the game faster"; GroupDescription: "Included Mods"
 Name: "StartingMercsMod"; Description: "Install StartingMercsMod - Randomizes starting mercs"; GroupDescription: "Included Mods"; Flags: unchecked
+Name: "pansar"; Description: "Install pansar - Enforces TT rules for armor"; GroupDescription: "Included Mods"; Flags: unchecked
 Name: "HardpointFixMod"; Description: "Install HardpointFixMod - Fixes issues with mech hardpoints"; GroupDescription: "Included Mods"; Flags: unchecked
 Name: "StatsFixMod"; Description: "Install StatsFixMod (alpha) - Fixes issues with stats calculations"; GroupDescription: "Included Mods"; Flags: unchecked
 
@@ -70,6 +71,7 @@ Source: "mods\SpeedMod\*"; DestDir: "{app}\Mods\SpeedMod"; Flags: ignoreversion 
 Source: "mods\HardpointFixMod\*"; DestDir: "{app}\Mods\HardpointFixMod"; Flags: ignoreversion recursesubdirs; Tasks: HardpointFixMod
 Source: "mods\StatsFixMod\*"; DestDir: "{app}\Mods\StatsFixMod"; Flags: ignoreversion recursesubdirs; Tasks: StatsFixMod
 Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod"; Flags: ignoreversion recursesubdirs; Tasks: StartingMercsMod
+Source: "mods\pansar\*"; DestDir: "{app}\Mods\pansar"; Flags: ignoreversion recursesubdirs; Tasks: pansar
 
 [Icons]
 Name: "{userdesktop}\BTMod Launcher"; Filename: "{app}\BattleTechModLauncher.exe"; Tasks: desktopicon
