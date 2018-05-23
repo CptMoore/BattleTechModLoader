@@ -3,8 +3,8 @@
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
 #define MyAppName "BattleTechMod Tools With Mods"
-#define MyAppVersion "0.6.0"
-#define MySetupName "BTMToolsSetup-0.6"
+#define MyAppVersion "0.7"
+#define MySetupName "BTMToolsSetup-0.7"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
@@ -13,9 +13,6 @@
 ; please adjust the code to your app
 
 [Setup]
-; NOTE: The value of AppId uniquely identifies this application.
-; Do not use the same AppId value in installers for other applications.
-; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{1765276C-3F2D-49BE-BB05-926C0BA2C863}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -38,7 +35,8 @@ DisableWelcomePage=no
 DisableDirPage=no
 DirExistsWarning=no
 UsePreviousAppDir=no
-UninstallDisplayIcon={app}\BattleTechModLauncher.exe
+UninstallDisplayIcon={app}\Mods\BTMTools\Icon.ico
+UsePreviousTasks=yes
 
 [Messages]
 ExitSetupMessage=Setup is not complete. If you exit now, {#MyAppName} will not be installed.%n%nExit Setup?
@@ -50,34 +48,76 @@ WizardSelectDir=Select {#MyParentApp} Install Location
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
-Name: "modsicon"; Description: "Add desktop shortcut to the mods folder"; GroupDescription: "{cm:AdditionalIcons}"
-Name: "desktopicon"; Description: "Add desktop shortcut to the auto-inject launcher"; GroupDescription: "{cm:AdditionalIcons}"
-Name: "SpeedMod"; Description: "Install SpeedMod - Press p in combat to make the game faster"; GroupDescription: "Included Mods"
-Name: "StartingMercsMod"; Description: "Install StartingMercsMod - Randomizes starting mercs"; GroupDescription: "Included Mods"; Flags: unchecked
-Name: "pansar"; Description: "Install pansar - Enforces TT rules for armor"; GroupDescription: "Included Mods"; Flags: unchecked
-Name: "HardpointFixMod"; Description: "Install HardpointFixMod - Fixes issues with mech hardpoints"; GroupDescription: "Included Mods"; Flags: unchecked
-Name: "StatsFixMod"; Description: "Install StatsFixMod (alpha) - Fixes issues with stats calculations"; GroupDescription: "Included Mods"; Flags: unchecked
+Name: "basetools"; Description: "Install BTML, ModTek and DynModLib (required)"; GroupDescription: "Tasks"
+Name: "modsicon"; Description: "Add desktop shortcut to the mods folder (recommended)"; GroupDescription: "Tasks"
+Name: "SpeedMod"; Description: "Install SpeedMod - Press p in combat to make the game faster (recommended)"; GroupDescription: "Tasks"
+Name: "HardpointFixMod"; Description: "Install HardpointFixMod - Fixes issues with mech hardpoints"; GroupDescription: "Tasks"; Flags: unchecked
+Name: "pansar"; Description: "Install pansar - Enforces TT rules for armor"; GroupDescription: "Tasks"; Flags: unchecked
+Name: "StartingMercsMod"; Description: "Install StartingMercsMod - Randomizes starting mercs"; GroupDescription: "Tasks"; Flags: unchecked
+Name: "StatsFixMod"; Description: "Install StatsFixMod - Fixes issues with stats calculations (alpha)"; GroupDescription: "Tasks"; Flags: unchecked
+; obsolete tasks
+; Name: "desktopicon"; Description: "Add desktop shortcut to the auto-inject launcher"; GroupDescription: "{cm:AdditionalIcons}"
+
+[UninstallDelete]
+; delete cache
+; modtek and btml
+Type: files; Name: "{app}\Mods\*.log"
+Type: filesandordirs; Name: "{app}\Mods\.modtek\Cache"
+; inclded mods
+Type: files; Name: "{app}\Mods\*\log.txt"
+Type: files; Name: "{app}\Mods\SpeedMod\*.dll"
+Type: files; Name: "{app}\Mods\HardpointFixMod\*.dll"
+Type: files; Name: "{app}\Mods\StatsFixMod\*.dll"
+Type: files; Name: "{app}\Mods\StartingMercsMod\*.dll"
+Type: files; Name: "{app}\Mods\pansar\*.dll"
+
+[InstallDelete]
+; delete cache
+; modtek and btml
+Type: files; Name: "{app}\Mods\*.log"
+Type: filesandordirs; Name: "{app}\Mods\.modtek\Cache"
+; inclded mods
+Type: files; Name: "{app}\Mods\*\log.txt"
+Type: files; Name: "{app}\Mods\SpeedMod\*.dll"
+Type: files; Name: "{app}\Mods\HardpointFixMod\*.dll"
+Type: files; Name: "{app}\Mods\StatsFixMod\*.dll"
+Type: files; Name: "{app}\Mods\StartingMercsMod\*.dll"
+Type: files; Name: "{app}\Mods\pansar\*.dll"
 
 [Files]
-Source: "..\BattleTechModLauncher\bin\Release\BattleTechModLauncher.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\0Harmony.dll"; DestDir: "{app}\BattleTech_Data\Managed"; Flags: ignoreversion
-Source: "..\BattleTechModLoaderInjector\bin\Release\BattleTechModLoader.dll"; DestDir: "{app}\BattleTech_Data\Managed"; Flags: ignoreversion
-Source: "..\BattleTechModLoaderInjector\bin\Release\BattleTechModLoaderInjector.exe"; DestDir: "{app}\BattleTech_Data\Managed"; Flags: ignoreversion
-Source: "..\DynModLib\source\bin\Release\DynModLib.dll"; DestDir: "{app}\Mods\DynModLib"; Flags: ignoreversion
-Source: "..\DynModLib\Mono.CSharp.dll"; DestDir: "{app}\Mods\DynModLib"; Flags: ignoreversion
-Source: "..\DynModLib\mod.json"; DestDir: "{app}\Mods\DynModLib"; Flags: ignoreversion
-Source: "..\ModTek\ModTek\bin\Release\ModTek.dll"; DestDir: "{app}\Mods"; Flags: ignoreversion
-Source: "mods\SpeedMod\*"; DestDir: "{app}\Mods\SpeedMod"; Flags: ignoreversion recursesubdirs; Tasks: SpeedMod
-Source: "mods\HardpointFixMod\*"; DestDir: "{app}\Mods\HardpointFixMod"; Flags: ignoreversion recursesubdirs; Tasks: HardpointFixMod
-Source: "mods\StatsFixMod\*"; DestDir: "{app}\Mods\StatsFixMod"; Flags: ignoreversion recursesubdirs; Tasks: StatsFixMod
-Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod"; Flags: ignoreversion recursesubdirs; Tasks: StartingMercsMod
-Source: "mods\pansar\*"; DestDir: "{app}\Mods\pansar"; Flags: ignoreversion recursesubdirs; Tasks: pansar
+Source: "Icon.ico"; DestDir: "{app}\Mods\BTMTools\"; Flags: ignoreversion; Tasks: modsicon
+Source: "Readme.txt"; DestDir: "{app}\Mods\BTMTools\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\BattleTechModLauncher\bin\Release\BattleTechModLauncher.exe"; DestDir: "{app}\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\0Harmony.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\BattleTechModLoaderInjector\bin\Release\BattleTechModLoader.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\BattleTechModLoaderInjector\bin\Release\BattleTechModLoaderInjector.exe"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\DynModLib\source\bin\Release\DynModLib.dll"; DestDir: "{app}\Mods\DynModLib\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\DynModLib\Mono.CSharp.dll"; DestDir: "{app}\Mods\DynModLib\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\DynModLib\mod.json"; DestDir: "{app}\Mods\DynModLib\"; Flags: ignoreversion; Tasks: basetools
+Source: "..\ModTek\ModTek\bin\Release\ModTek.dll"; DestDir: "{app}\Mods\"; Flags: ignoreversion; Tasks: basetools
+Source: "mods\SpeedMod\*"; DestDir: "{app}\Mods\SpeedMod\"; Excludes: "Settings.json"; Flags: ignoreversion recursesubdirs; Tasks: SpeedMod
+Source: "mods\SpeedMod\Settings.json"; DestDir: "{app}\Mods\SpeedMod\"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall; Tasks: SpeedMod
+Source: "mods\HardpointFixMod\*"; DestDir: "{app}\Mods\HardpointFixMod\"; Excludes: "Settings.json"; Flags: ignoreversion recursesubdirs; Tasks: HardpointFixMod
+Source: "mods\HardpointFixMod\Settings.json"; DestDir: "{app}\Mods\HardpointFixMod\"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall; Tasks: HardpointFixMod
+Source: "mods\StatsFixMod\*"; DestDir: "{app}\Mods\StatsFixMod\"; Flags: ignoreversion recursesubdirs; Tasks: StatsFixMod
+Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod\"; Excludes: "Settings.json"; Flags: ignoreversion recursesubdirs; Tasks: StartingMercsMod
+Source: "mods\StartingMercsMod\Settings.json"; DestDir: "{app}\Mods\StartingMercsMod\"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall; Tasks: StartingMercsMod
+Source: "mods\pansar\*"; DestDir: "{app}\Mods\pansar\"; Flags: ignoreversion recursesubdirs; Tasks: pansar
 
 [Icons]
-Name: "{userdesktop}\BTMod Launcher"; Filename: "{app}\BattleTechModLauncher.exe"; Tasks: desktopicon
-Name: "{userdesktop}\BattleTech Mods"; Filename: "{app}\Mods\"; Tasks: modsicon
-Name: "{app}\Mods\Enable BTModLoader"; Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"
-Name: "{app}\Mods\Disable BTModLoader"; Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: "/restore";
+Name: "{userdesktop}\BattleTech Mods"; Filename: "{app}\Mods\"; IconFilename: "{app}\Mods\BTMTools\Icon.ico"; Tasks: modsicon
+Name: "{app}\Mods\BTMTools\Uninstall BTMTools"; Filename: "{uninstallexe}"; Tasks: modsicon
+Name: "{app}\Mods\Loader Enable"; Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"
+Name: "{app}\Mods\Loader Disable"; Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: "/restore";
+Name: "{app}\Mods\Launcher with AutoEnabler"; Filename: "{app}\BattleTechModLauncher.exe"
+Name: "{app}\Mods\BTMTools\Tool - ModTek Releases"; Filename: "https://github.com/Mpstark/ModTek/releases"
+Name: "{app}\Mods\BTMTools\Tool - BattleTechModLoader Releases"; Filename: "https://github.com/Mpstark/BattleTechModLoader/releases"
+Name: "{app}\Mods\BTMTools\Tool - DynModLib Releases"; Filename: "https://github.com/CptMoore/DynModLib/releases"
+Name: "{app}\Mods\BTMTools\Tool - BattleTechModTools Releases"; Filename: "https://github.com/CptMoore/BattleTechModTools/releases"
+Name: "{app}\Mods\BTMTools\Mods - reddit BattleTechMods"; Filename: "https://www.reddit.com/r/BattleTechMods/"
+Name: "{app}\Mods\BTMTools\Mods - Nexus Mods Battletech"; Filename: "https://www.nexusmods.com/battletech/"
+; obsolete icons
+; Name: "{userdesktop}\BTMod Launcher"; Filename: "{app}\BattleTechModLauncher.exe"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: "/nokeypress"
@@ -86,6 +126,8 @@ Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Param
 Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: "/restore /nokeypress"
 
 [Code]
+
+// detect gog or steam installation
 function GetDefaultDir(def: string): string;
 var
 I : Integer;
@@ -137,4 +179,75 @@ begin
   end;
 	
 	Result := 'not found';
+end;
+
+
+ // ask for deleting all mods
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  case CurUninstallStep of
+    usPostUninstall:
+      begin
+        if SuppressibleMsgBox('Remove the Mods folder? (removes all mods and their settings)', mbConfirmation, MB_YESNO or MB_DEFBUTTON2, IDNO)= IDYES then
+          begin
+             DelTree(ExpandConstant('{app}\Mods'), True, True, True);
+          end
+      end;
+  end;
+end;
+
+// https://stackoverflow.com/questions/2000296/inno-setup-how-to-automatically-uninstall-previous-installed-version
+// we want to ingore version, as we also want to be able to install older versions over preview versions
+
+function GetUninstallString(): String;
+var
+  sUnInstPath: String;
+  sUnInstallString: String;
+begin
+  sUnInstPath := ExpandConstant('Software\Microsoft\Windows\CurrentVersion\Uninstall\{#emit SetupSetting("AppId")}_is1');
+  sUnInstallString := '';
+  if not RegQueryStringValue(HKLM, sUnInstPath, 'UninstallString', sUnInstallString) then
+    RegQueryStringValue(HKCU, sUnInstPath, 'UninstallString', sUnInstallString);
+  Result := sUnInstallString;
+end;
+
+function IsUpgrade(): Boolean;
+begin
+  Result := (GetUninstallString() <> '');
+end;
+
+function UnInstallOldVersion(): Integer;
+var
+  sUnInstallString: String;
+  iResultCode: Integer;
+begin
+// Return Values:
+// 1 - uninstall string is empty
+// 2 - error executing the UnInstallString
+// 3 - successfully executed the UnInstallString
+
+  // default return value
+  Result := 0;
+
+  // get the uninstall string of the old app
+  sUnInstallString := GetUninstallString();
+  if sUnInstallString <> '' then begin
+    sUnInstallString := RemoveQuotes(sUnInstallString);
+    if Exec(sUnInstallString, '/SILENT /NORESTART /SUPPRESSMSGBOXES','', SW_HIDE, ewWaitUntilTerminated, iResultCode) then
+      Result := 3
+    else
+      Result := 2;
+  end else
+    Result := 1;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if (CurStep=ssInstall) then
+  begin
+    if (IsUpgrade()) then
+    begin
+      UnInstallOldVersion();
+    end;
+  end;
 end;
