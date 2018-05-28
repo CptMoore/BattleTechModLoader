@@ -3,8 +3,8 @@
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
 #define MyAppName "BattleTechMod Tools With Mods"
-#define MyAppVersion "0.7"
-#define MySetupName "BTMToolsSetup-0.7"
+#define MyAppVersion "0.8"
+#define MySetupName "BTMToolsSetup-0.8"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
