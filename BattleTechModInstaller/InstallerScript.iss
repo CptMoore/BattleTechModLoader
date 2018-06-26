@@ -3,8 +3,8 @@
 ; copied from https://github.com/Qwiso/QModManager/blob/master/Installer/QModsInstallerScript.iss
 
 #define MyAppName "BattleTechMod Tools With Mods"
-#define MyAppVersion "0.8.8"
-#define MySetupName "BTMToolsSetup-0.8.8"
+#define MyAppVersion "0.8.9"
+#define MySetupName "BTMToolsSetup-0.8.9"
 #define MyAppPublisher "CptMoore"
 #define MyAppURL "https://github.com/CptMoore/BattleTechModTools"
 #define MyParentApp "BattleTech"
@@ -50,11 +50,11 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Tasks]
 Name: "basetools"; Description: "Install BTML, ModTek and DynModLib (required)"; GroupDescription: "Tasks"
 Name: "modsicon"; Description: "Add desktop shortcut to the mods folder (recommended)"; GroupDescription: "Tasks"
+Name: "SpeedMod"; Description: "Install SpeedMod - Speed up key is a toggle and speed up is constant"; GroupDescription: "Tasks"; Flags: unchecked
 Name: "HardpointFixMod"; Description: "Install HardpointFixMod - Fixes issues with mech hardpoints"; GroupDescription: "Tasks"; Flags: unchecked
 Name: "pansar"; Description: "Install pansar - Enforces TT rules for armor"; GroupDescription: "Tasks"; Flags: unchecked
 Name: "StartingMercsMod"; Description: "Install StartingMercsMod - Randomizes starting mercs"; GroupDescription: "Tasks"; Flags: unchecked
 ; obsolete tasks
-; Name: "SpeedMod"; Description: "Install SpeedMod - Press p in combat to make the game faster (recommended)"; GroupDescription: "Tasks"
 ; Name: "StatsFixMod"; Description: "Install StatsFixMod - Fixes issues with stats calculations (alpha)"; GroupDescription: "Tasks"; Flags: unchecked
 ; Name: "desktopicon"; Description: "Add desktop shortcut to the auto-inject launcher"; GroupDescription: "{cm:AdditionalIcons}"
 
@@ -95,6 +95,8 @@ Source: "..\DynModLib\source\bin\Release\DynModLib.dll"; DestDir: "{app}\Mods\Dy
 Source: "..\DynModLib\Mono.CSharp.dll"; DestDir: "{app}\Mods\DynModLib\"; Flags: ignoreversion; Tasks: basetools
 Source: "..\DynModLib\mod.json"; DestDir: "{app}\Mods\DynModLib\"; Flags: ignoreversion; Tasks: basetools
 Source: "binaries\ModTek.dll"; DestDir: "{app}\Mods\"; Flags: ignoreversion; Tasks: basetools
+Source: "mods\SpeedMod\*"; DestDir: "{app}\Mods\SpeedMod\"; Excludes: "Settings.json"; Flags: ignoreversion recursesubdirs; Tasks: SpeedMod
+Source: "mods\SpeedMod\Settings.json"; DestDir: "{app}\Mods\SpeedMod\"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall; Tasks: SpeedMod
 Source: "mods\HardpointFixMod\*"; DestDir: "{app}\Mods\HardpointFixMod\"; Excludes: "Settings.json"; Flags: ignoreversion recursesubdirs; Tasks: HardpointFixMod
 Source: "mods\HardpointFixMod\Settings.json"; DestDir: "{app}\Mods\HardpointFixMod\"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall; Tasks: HardpointFixMod
 Source: "mods\StartingMercsMod\*"; DestDir: "{app}\Mods\StartingMercsMod\"; Excludes: "Settings.json"; Flags: ignoreversion recursesubdirs; Tasks: StartingMercsMod
